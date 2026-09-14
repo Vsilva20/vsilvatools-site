@@ -1,0 +1,31 @@
+---
+import { createWhatsAppUrl } from '../config/company';
+
+interface Props {
+  message?: string;
+  label?: string;
+  className?: string;
+  floating?: boolean;
+}
+
+const {
+  message = 'Olá! Vim pelo site da Vsilva Tools e gostaria de solicitar um orçamento.',
+  label = 'Falar no WhatsApp',
+  className = 'btn btn-outline-success btn-lg px-4 py-2 rounded-pill shadow-sm',
+  floating = false,
+} = Astro.props;
+
+const url = createWhatsAppUrl(message);
+---
+
+{
+  floating ? (
+    <a href={url} target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Fale conosco pelo WhatsApp">
+      <i class="bi bi-whatsapp" aria-hidden="true"></i>
+    </a>
+  ) : (
+    <a href={url} target="_blank" rel="noopener noreferrer" class={className}>
+      {label}
+    </a>
+  )
+}

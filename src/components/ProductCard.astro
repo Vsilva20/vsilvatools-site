@@ -1,0 +1,57 @@
+---
+import type { Product } from '../types/Product';
+import { PRODUCT_IMAGE_BASE } from '../data/products';
+
+interface Props {
+  product: Product;
+  variant?: 'catalog' | 'featured' | 'related';
+}
+
+const { product, variant = 'catalog' } = Astro.props;
+const imageUrl = `${PRODUCT_IMAGE_BASE}${product.imagens[0]}`;
+const detailUrl = `/produtos/${product.slug}`;
+---
+
+{
+  variant === 'related' ? (
+    <div class="card h-100 position-relative shadow-sm">
+      <div class="p-3 bg-white product-image-related">
+        <img src={imageUrl} class="img-fluid" alt={product.nome} loading="lazy" decoding="async" />
+      </div>
+      <div class="card-body d-flex flex-column text-center border-top border-secondary">
+        <h6 class="card-title fw-bold text-white mb-2">{product.nome}</h6>
+        <a href={detailUrl} class="btn btn-sm btn-outline-success mt-auto rounded-pill">Ver Detalhes</a>
+      </div>
+    </div>
+  ) : (
+    <div class="card h-100 position-relative shadow-sm">
+      {product.destaque && (
+        <span class="badge position-absolute top-0 start-0 m-2 px-2 py-1 shadow-sm product-featured-badge">
+          <i class="bi bi-star-fill me-1" aria-hidden="true"></i> Mais Vendido
+        </span>
+      )}
+
+      <div class:list={['p-4 bg-white', variant === 'featured' ? 'product-image-featured' : 'product-image-catalog']}>
+        <img
+          src={imageUrl}
+          class:list={[variant === 'featured' ? 'card-img-top mx-auto d-block' : 'img-fluid']}
+          alt={variant === 'featured' ? `${product.nome} - Vsilva Tools` : product.nome}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      <div class:list={['card-body d-flex flex-column border-top border-secondary', { 'text-center': variant === 'featured' }]}>
+        <span class:list={['badge bg-secondary mb-2', variant === 'featured' ? 'mx-auto' : 'align-self-start']}>{product.categoria}</span>
+        <h5 class="card-title fw-bold text-white mb-2">{product.nome}</h5>
+        <p class:list={['card-text text-muted mb-4 small', { 'flex-grow-1': variant === 'catalog' }]}>{product.descricaoCurta}</p>
+        <a
+          href={detailUrl}
+          class:list={['mt-auto w-100 rounded-pill btn', variant === 'featured' ? 'btn-success' : 'btn-outline-success']}
+        >
+          Ver Detalhes
+        </a>
+      </div>
+    </div>
+  )
+}

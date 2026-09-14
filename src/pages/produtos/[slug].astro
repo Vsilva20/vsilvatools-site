@@ -1,0 +1,115 @@
+---
+export const prerender = true;
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import ProductGallery from '../../components/ProductGallery.astro';
+import { getAllProducts, getRelatedProducts, PRODUCT_IMAGE_BASE } from '../../data/products';
+import type { Product } from '../../types/Product';
+
+export function getStaticPaths() {
+  return getAllProducts().map((product) => ({ params: { slug: product.slug }, props: { product } }));
+}
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+const relatedProducts = getRelatedProducts(product);
+const brand = product.marcas.join(', ');
+const mainImage = `${PRODUCT_IMAGE_BASE}${product.imagens[0]}`;
+---
+
+<BaseLayout
+  title={`${product.nome} - Vsilva Tools`}
+  description={`${product.descricaoCurta} — Vsilva Tools.`}
+  image={mainImage}
+  canonical={`https://vsilvatools.com.br/produtos/${product.slug}`}
+>
+  <main class="container py-4 flex-grow-1">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/produtos">Produtos</a></li>
+          <li class="breadcrumb-item active text-white" aria-current="page">{product.nome}</li>
+        </ol>
+      </nav>
+      <a href="/produtos" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left me-1" aria-hidden="true"></i>Voltar para Produtos</a>
+    </div>
+
+    <h1 class="fw-bold mb-4 text-white">{product.nome}</h1>
+
+    <div class="row g-5 product-detail-row">
+      <div class="col-md-6"><ProductGallery productId={product.id} productName={product.nome} images={product.imagens} /></div>
+
+      <div class="col-md-6">
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+          <span class="badge bg-secondary fs-6">{product.categoria}</span>
+          <span class="badge bg-dark border border-secondary fs-6 product-brand-badge">{brand}</span>
+        </div>
+
+        <h2 class="fw-bold text-white fs-4 mt-4">Descrição</h2>
+        <p class="fs-5 text-muted">{product.descricaoCurta}</p>
+        <div class="text-muted mb-4 product-description" set:html={product.descricaoDetalhada}></div>
+
+        <h2 class="fw-bold text-white fs-4 mt-5 mb-3">Medidas disponíveis</h2>
+        <div class="table-responsive">
+          <table class="table table-dark table-striped table-bordered align-middle quote-options-table">
+            <thead><tr><th class="py-3 px-4">Código / Medida</th><th class="py-3 px-4 text-end">Adicionar</th></tr></thead>
+            <tbody>
+              {product.medidas.map((measure) => (
+                <tr>
+                  <td class="px-4 py-3 quote-product-code fw-semibold">{measure.codigo}</td>
+                  <td class="px-4 py-3 text-end quote-product-action">
+                    <button
+                      type="button"
+                      class="btn btn-success btn-add-quote d-inline-flex align-items-center justify-content-center gap-2"
+                      data-add-to-quote
+                      data-product-id={product.id}
+                      data-product-name={product.nome}
+                      data-category={product.categoria}
+                      data-brand={brand}
+                      data-code={measure.codigo}
+                      data-image={mainImage}
+                      aria-label={`Adicionar ${product.nome} ${measure.codigo} ao orçamento`}
+                    >
+                      <i class="bi bi-cart-plus" aria-hidden="true"></i>
+                      <span data-add-label>Adicionar ao orçamento</span>
+                    </button>
+                    <span class="quote-item-status d-block small mt-2" data-quote-item-status aria-live="polite"></span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {product.categoria === 'Inserto' && (
+          <p class="quote-unit-note small mb-0"><i class="bi bi-info-circle me-1" aria-hidden="true"></i>Insertos são orçados por unidade.</p>
+        )}
+
+        <div class="card bg-dark border-secondary mt-5 p-4 text-center shadow-sm">
+          <h2 class="text-white fw-bold mb-2 fs-4">Monte seu orçamento</h2>
+          <p class="text-muted mb-4">Adicione as medidas desejadas e envie todos os produtos de uma vez pelo WhatsApp.</p>
+          <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="/carrinho" class="btn btn-success d-inline-flex align-items-center gap-2 rounded-pill px-4"><i class="bi bi-cart3" aria-hidden="true"></i><span>Ver meu orçamento</span></a>
+            <a href="/produtos" class="btn btn-outline-secondary rounded-pill px-4">Continuar navegando</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {relatedProducts.length > 0 && (
+      <section class="mt-5 pt-5 border-top border-secondary" aria-labelledby="related-products-heading">
+        <h2 id="related-products-heading" class="h3 fw-bold text-center text-white mb-4">Produtos Relacionados</h2>
+        <div class="row justify-content-center g-4">
+          {relatedProducts.map((relatedProduct) => (
+            <div class="col-md-4 col-sm-6"><ProductCard product={relatedProduct} variant="related" /></div>
+          ))}
+        </div>
+      </section>
+    )}
+  </main>
+</BaseLayout>

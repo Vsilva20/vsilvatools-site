@@ -1,0 +1,61 @@
+---
+export const prerender = true;
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { getAllProducts } from '../../data/products';
+
+const products = getAllProducts();
+const normalizeSearch = (value: string): string => value.toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+---
+
+<BaseLayout
+  title="Nossos Produtos - Vsilva Tools"
+  description="Confira o catálogo completo de ferramentas de usinagem da Vsilva Tools. Insertos, Fresas de Metal Duro e Brocas T-Max das melhores marcas."
+  keywords="produtos usinagem, catálogo ferramentas, insertos, fresas, brocas, ZCC CT, OKE, KYOCERA"
+  canonical="https://vsilvatools.com.br/produtos"
+>
+  <header class="py-5 bg-dark border-bottom border-secondary">
+    <div class="container text-center">
+      <h1 class="display-5 fw-bold text-white mb-3">Nossos Produtos</h1>
+      <p class="lead text-muted">Explore nosso catálogo completo e encontre a ferramenta ideal para o seu projeto.</p>
+      <p class="text-success small mb-0">Caso não encontre o que procura, nos chame no WhatsApp!</p>
+    </div>
+  </header>
+
+  <main class="container py-5 flex-grow-1">
+    <div class="row mb-5 justify-content-center">
+      <div class="col-lg-8">
+        <div class="input-group mb-4 shadow-sm">
+          <span class="input-group-text bg-dark border-secondary text-white"><i class="bi bi-search" aria-hidden="true"></i></span>
+          <input type="search" id="buscaProduto" class="form-control form-control-lg bg-dark border-secondary text-white" placeholder="Buscar por nome, modelo ou descrição..." aria-label="Buscar produtos" />
+        </div>
+
+        <ul class="nav nav-pills nav-fill gap-2" id="produtosTab" role="tablist" aria-label="Filtrar por categoria">
+          <li class="nav-item" role="presentation"><button class="nav-link active w-100" id="tab-todos" data-bs-toggle="pill" data-filter="todos" type="button" role="tab" aria-selected="true">Todos</button></li>
+          <li class="nav-item" role="presentation"><button class="nav-link w-100" id="tab-insertos" data-bs-toggle="pill" data-filter="Inserto" type="button" role="tab" aria-selected="false">Insertos</button></li>
+          <li class="nav-item" role="presentation"><button class="nav-link w-100" id="tab-fresas" data-bs-toggle="pill" data-filter="Fresa" type="button" role="tab" aria-selected="false">Fresas</button></li>
+          <li class="nav-item" role="presentation"><button class="nav-link w-100" id="tab-brocas" data-bs-toggle="pill" data-filter="Broca T-Max" type="button" role="tab" aria-selected="false">Brocas T-Max</button></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row g-4" id="gridProdutos">
+      {products.map((product) => (
+        <div class="col-12 col-md-6 col-lg-4 produto-card" data-categoria={product.categoria} data-nome={normalizeSearch(`${product.nome} ${product.descricaoCurta}`)}>
+          <ProductCard product={product} />
+        </div>
+      ))}
+    </div>
+
+    <div id="noResults" class="text-center py-5 d-none" aria-live="polite">
+      <i class="bi bi-search fs-1 text-muted mb-3 d-block" aria-hidden="true"></i>
+      <h4 class="text-white">Nenhum produto encontrado</h4>
+      <p class="text-muted">Tente buscar por outros termos ou limpar os filtros.</p>
+    </div>
+  </main>
+
+  <script>
+    import '../../scripts/catalog';
+  </script>
+</BaseLayout>

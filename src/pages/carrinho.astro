@@ -1,0 +1,73 @@
+---
+export const prerender = true;
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { COMPANY } from '../config/company';
+---
+
+<BaseLayout
+  title="Seu Orçamento - Vsilva Tools"
+  description="Revise as ferramentas e quantidades selecionadas antes de solicitar sua cotação à Vsilva Tools."
+  robots="noindex,follow"
+  canonical="https://vsilvatools.com.br/carrinho"
+>
+  <header class="py-5 bg-dark border-bottom border-secondary">
+    <div class="container text-center">
+      <span class="quote-page-icon d-inline-flex align-items-center justify-content-center mb-3" aria-hidden="true"><i class="bi bi-clipboard-check"></i></span>
+      <h1 class="display-5 fw-bold text-white mb-3">Seu Orçamento</h1>
+      <p class="lead text-muted mb-0">Revise os produtos e quantidades antes de solicitar sua cotação.</p>
+    </div>
+  </header>
+
+  <main class="container py-5 flex-grow-1">
+    <section id="quoteCartEmpty" class="quote-empty-state text-center mx-auto" aria-live="polite">
+      <span class="quote-empty-icon d-inline-flex align-items-center justify-content-center mb-4" aria-hidden="true"><i class="bi bi-cart-x"></i></span>
+      <h2 class="h3 text-white fw-bold">Seu orçamento está vazio.</h2>
+      <p class="text-muted mb-4">Adicione produtos do nosso catálogo para solicitar uma cotação.</p>
+      <a href="/produtos" class="btn btn-success btn-lg rounded-pill px-4"><i class="bi bi-grid me-2" aria-hidden="true"></i>Ver produtos</a>
+    </section>
+
+    <section id="quoteCartContent" class="d-none" aria-label="Produtos do orçamento">
+      <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap mb-4">
+        <p class="text-muted mb-0"><span data-quote-cart-summary>0 itens diferentes</span></p>
+        <a href="/produtos" class="btn btn-outline-success rounded-pill"><i class="bi bi-plus-lg me-1" aria-hidden="true"></i>Continuar adicionando produtos</a>
+      </div>
+
+      <div id="quoteCartList"></div>
+      <p id="quoteInsertNotice" class="quote-unit-note small mt-3 mb-0 d-none"><i class="bi bi-info-circle me-1" aria-hidden="true"></i>Insertos são orçados por unidade.</p>
+
+      <div class="quote-cart-footer card mt-4 p-4 p-lg-5">
+        <div class="d-flex justify-content-between align-items-center gap-4 flex-column flex-lg-row">
+          <div>
+            <h2 class="h4 text-white mb-2">Lista pronta para cotação?</h2>
+            <p class="text-muted mb-0">Envie todos os itens em uma única mensagem para nossa equipe.</p>
+          </div>
+          <a id="quoteWhatsAppButton" class="btn btn-whatsapp btn-lg rounded-pill px-4 d-inline-flex align-items-center justify-content-center gap-2" data-whatsapp={COMPANY.whatsapp} target="_blank" rel="noopener noreferrer">
+            <i class="bi bi-whatsapp" aria-hidden="true"></i><span>Solicitar orçamento pelo WhatsApp</span>
+          </a>
+        </div>
+        <div class="border-top border-secondary mt-4 pt-4 d-flex justify-content-end">
+          <button type="button" class="btn btn-link text-danger text-decoration-none px-0" data-bs-toggle="modal" data-bs-target="#clearQuoteModal">
+            <i class="bi bi-trash3 me-1" aria-hidden="true"></i>Limpar orçamento
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal fade" id="clearQuoteModal" tabindex="-1" aria-labelledby="clearQuoteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content quote-confirm-modal">
+        <div class="modal-header border-secondary">
+          <h2 class="modal-title fs-5 text-white" id="clearQuoteModalLabel">Limpar orçamento</h2>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body text-muted">Deseja remover todos os produtos do orçamento?</div>
+        <div class="modal-footer border-secondary">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" data-confirm-clear-quote>Limpar orçamento</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

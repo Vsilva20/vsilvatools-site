@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO -->
+  <title>Sobre Nós & Contato - Vsilva Tools</title>
+  <meta name="description" content="Conheça a história da Vsilva Tools, especialistas em ferramentas de usinagem. Entre em contato para dúvidas ou solicite um orçamento.">
+  <meta name="keywords" content="contato Vsilva Tools, sobre nós usinagem, ferramentas ABC Paulista">
+  <meta property="og:title" content="Contato - Vsilva Tools">
+  <meta property="og:description" content="Fale conosco e conheça nossa história no setor de usinagem.">
+  <meta property="og:url" content="https://vsilvatools.com.br/contato.php">
+
+  <!-- CSS Globais -->
+  <?php include 'head_includes.php'; ?>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Navbar -->
+  <?php include 'header.php'; ?>
+
+  <!-- Header da Página -->
+  <header class="py-5 bg-dark border-bottom border-secondary">
+    <div class="container text-center">
+      <h1 class="display-5 fw-bold text-white mb-3">Contato & Sobre Nós</h1>
+      <p class="lead text-muted">Estamos prontos para ajudar sua empresa a encontrar as melhores soluções em usinagem.</p>
+    </div>
+  </header>
+
+  <!-- Sobre Nós -->
+  <section class="sobre-section py-5 bg-light">
+    <div class="container py-4">
+      <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8 bg-dark p-5 rounded shadow-sm border border-secondary">
+          <h2 class="mb-4 text-center fw-bold" style="color: var(--cor-verde);">Nossa História</h2>
+          
+          <p class="fs-5 text-muted">
+            A <strong>Vsilva Tools</strong> é uma empresa familiar que nasceu da união entre experiência prática no ramo de usinagem e a inovação digital.
+            Fundada com o objetivo de oferecer ferramentas nacionais e importadas de alta qualidade para todo tipo de usinagem, nossa missão é entregar soluções confiáveis
+            e acessíveis para profissionais exigentes da indústria metalúrgica.
+          </p>
+          <p class="fs-5 text-muted">
+            Nosso co-diretor é um especialista com anos de experiência prática em usinagem, responsável por garantir a qualidade dos produtos e oferecer atendimento técnico personalizado.
+            A gestão online é feita por seu filho, responsável por trazer a empresa para o ambiente digital, com foco em modernizar o acesso aos nossos produtos.
+          </p>
+          <p class="fs-5 text-muted">
+            Trabalhamos com marcas renomadas como <strong>HADSTO</strong>, <strong>ZCC CT</strong>, <strong>OKE</strong>, <strong>CRETO</strong> e <strong>KYOCERA</strong>, reconhecidas pela durabilidade e precisão no corte de materiais difíceis.
+          </p>
+          <p class="fs-5 text-muted">
+            Enviamos para todo o Brasil com segurança via Correios. Também realizamos <strong>entregas pessoais na região do ABC Paulista</strong>, oferecendo maior agilidade aos nossos clientes locais.
+          </p>
+          <p class="fs-5 text-white fw-bold text-center mt-5 p-3 border border-secondary rounded" style="background-color: var(--cor-fundo);">
+            Na Vsilva Tools, priorizamos a confiança, o atendimento próximo e a entrega de produtos que realmente fazem a diferença.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulário de Contato -->
+  <section id="contato" class="py-5">
+    <?php include 'formulario.php'; ?>
+  </section>
+
+  <?php include 'footer.php'; ?>
+</body>
+</html>

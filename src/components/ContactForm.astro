@@ -1,0 +1,55 @@
+---
+const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
+---
+
+{recaptchaSiteKey && <script is:inline src="https://www.google.com/recaptcha/api.js" async defer></script>}
+
+<div class="container py-5">
+  <h2 class="text-center mb-4 fw-bold text-white">Envie uma Mensagem</h2>
+  <h5 class="text-center mt-3 mb-5 text-muted">Para tirar dúvidas sobre nossos produtos ou montar um orçamento, preencha o formulário abaixo:</h5>
+
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card bg-dark border-secondary shadow-sm p-4">
+        <form id="form-contato" data-recaptcha-enabled={recaptchaSiteKey ? 'true' : 'false'} novalidate>
+          <div class="mb-3">
+            <label for="nome" class="form-label text-white fw-semibold">Nome Completo</label>
+            <input type="text" class="form-control" id="nome" name="nome" maxlength="120" placeholder="Seu nome" required aria-required="true" autocomplete="name" />
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label text-white fw-semibold">E-mail</label>
+            <input type="email" class="form-control" id="email" name="email" maxlength="254" placeholder="seu.email@exemplo.com" required aria-required="true" autocomplete="email" />
+          </div>
+
+          <div class="mb-4">
+            <label for="telefone" class="form-label text-white fw-semibold">Telefone / WhatsApp</label>
+            <input type="tel" class="form-control" id="telefone" name="telefone" maxlength="15" pattern="\(\d{2}\) \d{4,5}-\d{4}" placeholder="(11) 90000-0000" required aria-required="true" autocomplete="tel" inputmode="tel" />
+          </div>
+
+          <div class="mb-4">
+            <label for="mensagem" class="form-label text-white fw-semibold">Mensagem</label>
+            <textarea class="form-control" id="mensagem" name="mensagem" rows="4" minlength="10" maxlength="2000" placeholder="Como podemos ajudar?" required aria-required="true"></textarea>
+          </div>
+
+          {recaptchaSiteKey && (
+            <div class="d-flex justify-content-center mb-4">
+              <div class="g-recaptcha" data-sitekey={recaptchaSiteKey}></div>
+            </div>
+          )}
+
+          <div id="contactFormFeedback" class="alert d-none" role="status" aria-live="polite" tabindex="-1"></div>
+
+          <button type="submit" class="btn btn-success w-100 py-2 fw-bold fs-5 rounded-pill">
+            <i class="bi bi-send me-2" aria-hidden="true"></i>
+            <span data-submit-label>Enviar Mensagem</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import '../scripts/contactForm';
+</script>

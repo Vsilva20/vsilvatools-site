@@ -1,0 +1,12 @@
+support icon = <a href="https://www.flaticon.com/free-icons/suport" title="suport icons">Suport icons created by Mayor Icons - Flaticon</a>
+quality icon = <a href="https://www.flaticon.com/free-icons/guarantee" title="guarantee icons">Guarantee icons created by Uniconlabs - Flaticon</a>
+shipping icon = <a href="https://www.flaticon.com/free-icons/delivery" title="delivery icons">Delivery icons created by Pixel perfect - Flaticon</a>
+budget icon = <a href="https://www.flaticon.com/free-icons/budget" title="budget icons">Budget icons created by Iconjam - Flaticon</a>
+instagram icon = <a href="https://www.flaticon.com/free-icons/instagram-logo" title="instagram logo icons">Instagram logo icons created by Freepik - Flaticon</a>
+
+
+
+
+
+
+
