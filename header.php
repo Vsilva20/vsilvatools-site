@@ -11,6 +11,12 @@
         <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="produtos.php">Produtos</a></li>
         <li class="nav-item"><a class="nav-link" href="contato.php">Contato</a></li>
+        <li class="nav-item ms-lg-2 d-flex align-items-center">
+          <button class="theme-toggle d-inline-flex align-items-center gap-2" type="button" data-theme-toggle aria-label="Ativar modo claro" aria-pressed="false" title="Ativar modo claro">
+            <i class="bi bi-sun-fill" data-theme-icon aria-hidden="true"></i>
+            <span class="d-lg-none" data-theme-label>Modo claro</span>
+          </button>
+        </li>
         <li class="nav-item ms-lg-2">
           <a class="nav-link quote-cart-link d-inline-flex align-items-center gap-2" href="carrinho.php" aria-label="Abrir meu orçamento: 0 itens">
             <i class="bi bi-cart3" aria-hidden="true"></i>
