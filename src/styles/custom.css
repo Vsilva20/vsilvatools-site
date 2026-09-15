@@ -658,21 +658,6 @@ a:focus-visible {
 }
 
 @media (max-width: 767.98px) {
-  .featured-carousel-control-prev,
-  .featured-carousel-control-next {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .product-detail-row {
-    --bs-gutter-x: 1.5rem;
-  }
-
-  .product-brand-badge {
-    max-width: 100%;
-    white-space: normal;
-  }
-
   .quote-options-table,
   .quote-options-table tbody,
   .quote-options-table tr,

@@ -41,13 +41,13 @@ const mainImage = `${PRODUCT_IMAGE_BASE}${product.imagens[0]}`;
 
     <h1 class="fw-bold mb-4 text-white">{product.nome}</h1>
 
-    <div class="row g-5 product-detail-row">
+    <div class="row g-5">
       <div class="col-md-6"><ProductGallery productId={product.id} productName={product.nome} images={product.imagens} /></div>
 
       <div class="col-md-6">
-        <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+        <div class="d-flex align-items-center gap-2 mb-3">
           <span class="badge bg-secondary fs-6">{product.categoria}</span>
-          <span class="badge bg-dark border border-secondary fs-6 product-brand-badge">{brand}</span>
+          <span class="badge bg-dark border border-secondary fs-6">{brand}</span>
         </div>
 
         <h2 class="fw-bold text-white fs-4 mt-4">Descrição</h2>
