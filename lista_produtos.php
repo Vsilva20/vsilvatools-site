@@ -18,7 +18,7 @@ $produtosDestacados = getProdutosDestaque(6);
           <div class="row justify-content-center">
             <?php foreach ($grupo as $produto): ?>
               <div class="col-md-4 col-sm-6 mb-4">
-                <div class="card h-100 position-relative">
+                <div class="card h-100 position-relative overflow-hidden">
                   
                   <!-- Badge Mais Vendido -->
                   <?php if ($produto['destaque']): ?>
@@ -28,10 +28,9 @@ $produtosDestacados = getProdutosDestaque(6);
                   <?php endif; ?>
 
                   <!-- Imagem do Produto -->
-                  <div class="p-3 bg-white" style="border-radius: 12px 12px 0 0;">
+                  <div class="featured-product-image bg-white">
                     <img src="<?= $caminhoImagens . $produto['imagens'][0] ?>" 
-                         class="card-img-top mx-auto d-block" 
-                         style="max-height: 200px; width: auto; object-fit: contain;" 
+                         class="featured-product-image__asset"
                          alt="<?= $produto['nome'] ?> - Vsilva Tools"
                          loading="lazy"
                          decoding="async">
